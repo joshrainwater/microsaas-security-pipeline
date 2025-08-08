@@ -1,0 +1,24 @@
+# For authenticated scans or more complex setups, ZAP also allows scripts, 
+# context files, and API tokens.
+
+name: OWASP ZAP Scan
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'  # Weekly scan
+  workflow_dispatch:
+
+jobs:
+  zap:
+    name: OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.10.0
+        with:
+          # Replace the target with a deployed URL (your staging or prod app)
+          target: 'https://jmrainwater.com'
+          fail_action: true
+
+

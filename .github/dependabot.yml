@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Add more ecosystems if your app uses multiple languages.
+  # eg. Golang backend and JS frontend
+  - package-ecosystem: "npm" # Or "gomod", "pip", etc.
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+

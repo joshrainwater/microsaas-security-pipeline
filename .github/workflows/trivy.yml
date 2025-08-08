@@ -1,0 +1,32 @@
+name: Trivy Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly scan
+  workflow_dispatch:
+
+jobs:
+  trivy:
+    name: Run Trivy Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.51.1_Linux-64bit.deb
+          sudo dpkg -i trivy_0.51.1_Linux-64bit.deb
+
+      - name: Scan source code (SCA/IaC)
+        run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+
+      # Uncomment if you want to scan a Docker image
+      # - name: Scan Docker image
+      #   run: trivy image my-image:latest
