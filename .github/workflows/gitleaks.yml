@@ -10,16 +10,13 @@ jobs:
   gitleaks:
     name: Scan for secrets with Gitleaks
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
-        with:
-          scan-dir: '.' # Scan directory (all files)
-          config-path: '' # Empty means use defualt roles
-          redact: false # Hide secrets from logs
-          verbose: true 
-          fail: true # Fail if any secrets are found
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
