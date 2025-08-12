@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Run Trivy Scanner # in FS mode(
         uses: aquasecurity/trivy-action@0.32.0
@@ -31,7 +31,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  #       uses: actions/checkout@v5
         
   #     - name: Build an image from Dockerfile
   #       run: docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
